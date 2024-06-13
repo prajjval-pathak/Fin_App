@@ -7,6 +7,8 @@ import Search from "./Components/Search/Search";
 import { CompanySearch } from "./CompanyTypes";
 import { searchCompanies } from "./api";
 import ListPorfolio from "./Components/Portfolio/PortfolioList/ListPorfolio";
+import NavBar from "./Components/NavBar/NavBar";
+import Hero from "./Components/Hero/Hero";
 
 function App() {
   const [search, setSearch] = useState<string>("");
@@ -33,10 +35,18 @@ function App() {
     const updatedPortfolio = [...portfolioValues, e.target[0].value];
     setPortfolioValues(updatedPortfolio);
   };
-
+  const handleCardPortfolioDelete = (e: any) => {
+    console.log(e);
+    const filteredLi = portfolioValues.filter((ele) => ele !== e.target.value);
+    setPortfolioValues(filteredLi);
+  };
   return (
     <div className="App">
-      <ListPorfolio portfolioValues={portfolioValues} />
+      <NavBar />
+      <ListPorfolio
+        handleCardPortfolioDelete={handleCardPortfolioDelete}
+        portfolioValues={portfolioValues}
+      />
       <Search
         handleChange={handleChange}
         searchString={search}

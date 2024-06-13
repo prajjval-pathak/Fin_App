@@ -11,7 +11,9 @@ const CardList = ({ searchArray, onPortfolioCreate }: Props) => {
   return (
     <>
       {searchArray.length <= 0 ? (
-        <h1>NO elements found</h1>
+        <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+          No results!
+        </p>
       ) : (
         searchArray.map((ele) => {
           return (
