@@ -1,6 +1,5 @@
 import React from "react";
 import CardPortfolio from "../CardPortfolo/CardPortfolio";
-import { v4 as uuidv4 } from "uuid";
 interface Props {
   portfolioValues: string[];
   handleCardPortfolioDelete: (e: any) => void;
