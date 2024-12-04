@@ -10,12 +10,18 @@ import ListPorfolio from "./Components/Portfolio/PortfolioList/ListPorfolio";
 import NavBar from "./Components/NavBar/NavBar";
 import Hero from "./Components/Hero/Hero";
 import { Outlet } from "react-router";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./Context/useAuth";
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Outlet />
+      <AuthProvider>
+        <NavBar />
+        <Outlet />
+        <ToastContainer />
+      </AuthProvider>
     </div>
   );
 }

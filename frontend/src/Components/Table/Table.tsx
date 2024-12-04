@@ -1,33 +1,38 @@
 import React from "react";
 import { testIncomeStatementData } from "./TestData";
 
-type Props = {};
+type Props = { configs: any; data: any };
 
-const data = testIncomeStatementData;
-type Company = (typeof data)[0];
-const configs = [
-  {
-    label: "Year",
-    render: (company: Company) => company.calendarYear,
-  },
-  {
-    label: "costOfRevenue",
-    render: (company: Company) => company.costOfRevenue,
-  },
-];
+// const data = testIncomeStatementData;
+// type Company = (typeof data)[0];
+// const configs = [
+//   {
+//     label: "Year",
+//     render: (company: Company) => company.calendarYear,
+//   },
+//   {
+//     label: "costOfRevenue",
+//     render: (company: Company) => company.costOfRevenue,
+//   },
+// ];
 
-const Table = (props: Props) => {
-  const renderRows = data.map((company) => {
+const Table = ({ configs, data }: Props) => {
+  const renderRows = data.map((company: any) => {
     return (
       <tr key={company.cik}>
-        <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-          {configs[0].render(company)}
-        </td>
-        <td className="p-3">{configs[1].render(company)}</td>
+        {configs.map((config: any, idx: any) => (
+          <td
+            className="p-4 whitespace-nowrap text-sm font-normal text-gray-900"
+            key={idx}
+          >
+            {config.render(company)}
+          </td>
+        ))}
+        // <td className="p-3">{configs[1].render(company)}</td>
       </tr>
     );
   });
-  const renderHeaders = configs.map((config) => {
+  const renderHeaders = configs.map((config: any) => {
     return (
       <th
         className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wide"

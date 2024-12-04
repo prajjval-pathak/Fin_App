@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "../../Components/Table/Table";
+import RatioList from "../../Components/RatioList/RatioList";
 
 type Props = {};
 
@@ -10,7 +11,8 @@ const DesignPage = (props: Props) => {
         This is he Design Guide for Our Finance App, This will content Reusable
         Components
       </h1>
-      <Table />
+      {/* <RatioList data={} config={}} /> */}
+      {/* <Table configs={"yoyo"} data={} /> */}
     </>
   );
 };

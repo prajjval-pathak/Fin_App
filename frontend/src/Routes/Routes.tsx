@@ -6,7 +6,10 @@ import SearchPage from "../Pages/SearchPage/SearchPage";
 import CompanyPage from "../Pages/CompanyPage/CompanyPage";
 import CompanyProfile from "../Components/CompanyProfile/CompanyProfile";
 import IncomeStatement from "../Components/IncomeStatement/IncomeStatement";
-import DesignPage from "../Pages/DesignPage/DesignPage";
+// import DesignPage from "../Pages/DesignPage/DesignPage";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +20,31 @@ const router = createBrowserRouter([
         path: "",
         element: <Hero />,
       },
-      { path: "search", element: <SearchPage /> },
-      { path: "company-design", element: <DesignPage /> },
+      { path: "register", element: <RegisterPage /> },
+      { path: "login", element: <LoginPage /> },
+      {
+        path: "search",
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      // {
+      //   path: "company-design",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <DesignPage />
+      //     </ProtectedRoute>
+      //   ),
+      // },
       {
         path: "company/:ticker",
-        element: <CompanyPage />,
+        element: (
+          <ProtectedRoute>
+            <CompanyPage />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: "company-profile",
