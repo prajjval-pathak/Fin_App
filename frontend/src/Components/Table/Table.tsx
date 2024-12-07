@@ -28,7 +28,7 @@ const Table = ({ configs, data }: Props) => {
             {config.render(company)}
           </td>
         ))}
-        // <td className="p-3">{configs[1].render(company)}</td>
+        {/* // <td className="p-3">{configs[1].render(company)}</td> */}
       </tr>
     );
   });

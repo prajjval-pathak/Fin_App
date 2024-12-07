@@ -10,6 +10,8 @@ import IncomeStatement from "../Components/IncomeStatement/IncomeStatement";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
+import BalanceSheet from "../Components/BalanceSheet/BalanceSheet";
+import CashFlow from "../Components/CashFlow/CashFlow";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,8 @@ const router = createBrowserRouter([
             path: "income-statement",
             element: <IncomeStatement />,
           },
+          { path: "balance-sheet", element: <BalanceSheet /> },
+          {path:"cash-flow",element:<CashFlow/>}
         ],
       },
     ],

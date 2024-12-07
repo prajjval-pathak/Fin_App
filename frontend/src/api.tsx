@@ -1,5 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import {
+  CompanyBalanceSheet,
+  CompanyCashFlow,
   CompanyIncomeStatement,
   CompanyKeyMetrics,
   CompanyProfile,
@@ -25,6 +27,7 @@ export const searchCompanies = async (query: string) => {
     const res = await axios.get<SearchResponse>(
       `https://financialmodelingprep.com/api/v3/search?query=${query}&apikey=${process.env.REACT_APP_Api_key}`
     );
+    console.log(res);
     return res.data;
   } catch (error) {
     handleError(error);
@@ -55,11 +58,33 @@ export const getCompanyKeyMetrics = async (query: string) => {
     handleError(error);
   }
 };
-export const getIncomeStatement=async(query:string)=>{
+export const getIncomeStatement = async (query: string) => {
   try {
-    const res=await axios.get<CompanyIncomeStatement[]>(`https://financialmodelingprep.com/api/v3/income-statement/${query}?limit=40&apikey=${process.env.REACT_APP_Api_key}`)
-  return res
+    const res = await axios.get<CompanyIncomeStatement[]>(
+      `https://financialmodelingprep.com/api/v3/income-statement/${query}?limit=40&apikey=${process.env.REACT_APP_Api_key}`
+    );
+    return res;
   } catch (error) {
-    handleError(error)
+    handleError(error);
   }
-}
+};
+export const getBalanceSheet = async (query: string) => {
+  try {
+    const res = await axios.get<CompanyBalanceSheet[]>(
+      `https://financialmodelingprep.com/api/v3/balance-sheet-statement/${query}?limit=40&apikey=${process.env.REACT_APP_Api_key}`
+    );
+    return res;
+  } catch (error) {
+    handleError(error);
+  }
+};
+export const getCashFlowStatement = async (query: string) => {
+  try {
+    const res = await axios.get<CompanyCashFlow[]>(
+      `https://financialmodelingprep.com/api/v3/cash-flow-statement/${query}?limit=40&apikey=${process.env.REACT_APP_Api_key}`
+    );
+    return res;
+  } catch (error) {
+    handleError(error);
+  }
+};
