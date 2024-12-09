@@ -6,41 +6,22 @@ import CardList from "./Components/CardList/CardList";
 import Search from "./Components/Search/Search";
 import { CompanySearch } from "./CompanyTypes";
 import { searchCompanies } from "./api";
+import ListPorfolio from "./Components/Portfolio/PortfolioList/ListPorfolio";
+import NavBar from "./Components/NavBar/NavBar";
+import Hero from "./Components/Hero/Hero";
+import { Outlet } from "react-router";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./Context/useAuth";
 
 function App() {
-  const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
-  const [serverError, setServerError] = useState<string>("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-  const handleSearchSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    const searchRes = await searchCompanies(search);
-    //Type Narrowing to avoid type mismatch
-    if (typeof searchRes === "string") {
-      setServerError("Search operation failed");
-    } else if (Array.isArray(searchRes)) {
-      setSearchResult(searchRes);
-    }
-  };
-  const handlePortfolioCreate = (e: SyntheticEvent) => {
-    e.preventDefault();
-    console.log(e);
-  };
-
   return (
     <div className="App">
-      <Search
-        handleChange={handleChange}
-        searchString={search}
-        onSearchSubmit={handleSearchSubmit}
-      />
-      <CardList
-        searchArray={searchResult}
-        onPortfolioCreate={handlePortfolioCreate}
-      />
+      <AuthProvider>
+        <NavBar />
+        <Outlet />
+        <ToastContainer />
+      </AuthProvider>
     </div>
   );
 }
