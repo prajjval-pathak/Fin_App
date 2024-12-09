@@ -6,7 +6,7 @@ import { UserAccountToken } from "../CompanyTypes";
 export const Login = async (username: string, password: string) => {
   try {
     const data = await axios.post<UserAccountToken>(
-      "https://localhost:44396/api/account/login",
+      "http://finapp.somee.com/api/account/login",
       {
         username: username,
         password: password,
@@ -27,7 +27,7 @@ export const RegisterUser = async (
   try {
     console.log(email);
     const data = await axios.post<UserAccountToken>(
-      "https://localhost:44396/api/account/register",
+      "http://finapp.somee.com/api/account/register",
       {
         email: email,
         username: username,
@@ -39,8 +39,8 @@ export const RegisterUser = async (
     handleError(e);
   }
 };
-export const isAuthenticateCheck=async()=>{
+export const isAuthenticateCheck = async () => {
   const apiClient = axios.create({
     baseURL: "https://localhost:44396/api/account/", // Replace with your API's base URL
   });
-}
+};
