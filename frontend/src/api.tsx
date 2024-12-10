@@ -13,7 +13,7 @@ interface SearchResponse {
   data: CompanySearch[];
 }
 export const apiClient = axios.create({
-  baseURL: "http://finapp.somee.com/api/",
+  baseURL: "https://finapp.somee.com/api/",
 });
 apiClient.interceptors.request.use((ct: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem("token");
