@@ -6,7 +6,7 @@ import { UserAccountToken } from "../CompanyTypes";
 export const Login = async (username: string, password: string) => {
   try {
     const data = await axios.post<UserAccountToken>(
-      "http://finapp.somee.com/api/account/login",
+      "https://finapp.somee.com/api/account/login",
       {
         username: username,
         password: password,
@@ -27,7 +27,7 @@ export const RegisterUser = async (
   try {
     console.log(email);
     const data = await axios.post<UserAccountToken>(
-      "http://finapp.somee.com/api/account/register",
+      "https://finapp.somee.com/api/account/register",
       {
         email: email,
         username: username,
