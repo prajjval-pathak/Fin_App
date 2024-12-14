@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router";
 import { useAuth } from "../Context/useAuth";
 import { isAuthorized } from "../Utils/IsAuthorized";
+import LoadingSpinner from "../Components/LoadingSpinner/LoadingSpinner";
 
 type Props = { children: React.ReactNode };
 
@@ -24,7 +25,7 @@ const ProtectedRoute = ({ children }: Props) => {
     console.log(isAuthenticated);
   }, []);
   if (isAuthenticated === "") {
-    return <p>Loading</p>;
+    return <LoadingSpinner />;
   }
   return isAuthenticated === "Authorized" ? (
     <>{children}</>

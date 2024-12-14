@@ -4,6 +4,7 @@ import { getIncomeStatement } from "../../api";
 import { useOutletContext } from "react-router";
 import { handleError } from "../../ErrorHandler/ErrorHandler";
 import Table from "../Table/Table";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 type Props = {};
 const configs = [
@@ -85,7 +86,7 @@ const IncomeStatement = (props: Props) => {
       {incomeStatement ? (
         <Table configs={configs} data={incomeStatement} />
       ) : (
-        <p>Loading...</p>
+        <LoadingSpinner />
       )}
     </>
   );

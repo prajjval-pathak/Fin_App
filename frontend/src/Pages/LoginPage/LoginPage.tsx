@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FieldValue, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../Context/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import { isAuthorized } from "../../Utils/IsAuthorized";
+import { Link } from "react-router-dom";
 //Design Form Using React hook Form
 //Use Zod For Validation
 type LoginFormInput = {
@@ -20,6 +21,7 @@ const LoginPage = () => {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setIsLoading] = useState(false);
   // const val = isAuthorized();
   const from = location?.state?.from?.pathname || "/";
   const {
@@ -28,8 +30,9 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginFormInput>({ resolver: zodResolver(scheme) });
   const handleLogin = async (data: LoginFormInput) => {
-    await loginUser(data.username, data.password);
-
+    setIsLoading(true);
+    loginUser(data.username, data.password);
+    setIsLoading(false);
     navigate(from, { replace: true });
   };
   return (
@@ -93,19 +96,20 @@ const LoginPage = () => {
                 </a>
               </div>
               <button
+                disabled={loading}
                 type="submit"
                 className="w-full text-white bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Sign in
+                {loading ? "Loading..." : "Submit"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
-                <a
-                  href="#"
+                <Link
+                  to="/register"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Sign up
-                </a>
+                </Link>
               </p>
             </form>
           </div>
