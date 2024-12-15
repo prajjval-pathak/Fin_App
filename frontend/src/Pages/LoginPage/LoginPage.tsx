@@ -18,10 +18,9 @@ const scheme = z.object({
 });
 
 const LoginPage = () => {
-  const { loginUser } = useAuth();
+  const { loginUser, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setIsLoading] = useState(false);
   // const val = isAuthorized();
   const from = location?.state?.from?.pathname || "/";
   const {
@@ -30,9 +29,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginFormInput>({ resolver: zodResolver(scheme) });
   const handleLogin = async (data: LoginFormInput) => {
-    setIsLoading(true);
-    loginUser(data.username, data.password);
-    setIsLoading(false);
+    await loginUser(data.username, data.password);
     navigate(from, { replace: true });
   };
   return (
@@ -96,11 +93,11 @@ const LoginPage = () => {
                 </a>
               </div>
               <button
-                disabled={loading}
+                disabled={isLoading}
                 type="submit"
                 className="w-full text-white bg-lightGreen hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                {loading ? "Loading..." : "Submit"}
+                {isLoading ? "Loading..." : "Submit"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
