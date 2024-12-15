@@ -12,7 +12,7 @@ export const Login = async (username: string, password: string) => {
         password: password,
       }
     );
-    console.log("here", data);
+
     return data;
   } catch (error) {
     console.log("here", error);

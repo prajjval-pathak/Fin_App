@@ -18,6 +18,7 @@ type UserContextType = {
   registerUser: (email: string, username: string, password: string) => void;
   isLoggedIn: () => boolean;
   logoutUser: () => void;
+  isLoading: boolean;
 };
 type Props = { children: React.ReactNode };
 const AuthContext = createContext<UserContextType>({} as UserContextType);
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isReady, setIsReady] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
@@ -40,6 +42,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   const loginUser = async (username: string, password: string) => {
     try {
+      setIsLoading(true);
       const res = await Login(username, password);
       if (res) {
         localStorage.setItem("token", res?.data.token);
@@ -51,10 +54,12 @@ export const AuthProvider = ({ children }: Props) => {
         localStorage.setItem("user", JSON.stringify(userObj));
         setUser(userObj!);
         setToken(res?.data.token!);
+        setIsLoading(false);
         // navigate("/search");
         toast.success("login Sucess");
       }
     } catch (error) {
+      setIsLoading(false);
       toast.warning("Internal Server error");
     }
   };
@@ -64,6 +69,7 @@ export const AuthProvider = ({ children }: Props) => {
     password: string
   ) => {
     try {
+      setIsLoading(true);
       const res = await RegisterUser(email, username, password);
       if (res) {
         localStorage.setItem("token", res?.data.token);
@@ -75,9 +81,11 @@ export const AuthProvider = ({ children }: Props) => {
         setToken(res?.data.token!);
         setUser(regUser!);
         navigate("/search");
+        setIsLoading(false);
         toast.success("Registeration Success");
       }
     } catch (e) {
+      setIsLoading(false);
       toast.warning("Internal Server Error Occured");
     }
   };
@@ -93,7 +101,15 @@ export const AuthProvider = ({ children }: Props) => {
   };
   return (
     <AuthContext.Provider
-      value={{ user, token, registerUser, loginUser, isLoggedIn, logoutUser }}
+      value={{
+        user,
+        token,
+        registerUser,
+        loginUser,
+        isLoggedIn,
+        logoutUser,
+        isLoading,
+      }}
     >
       {isReady ? children : null}
     </AuthContext.Provider>
