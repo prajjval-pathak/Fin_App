@@ -6,9 +6,10 @@ type Company = typeof data;
 type Props = {
   config: any;
   data: any;
+  component: string;
 };
 
-const RatioList = ({ config, data }: Props) => {
+const RatioList = ({ config, data, component }: Props) => {
   const renderedRows = config.map((row: any) => {
     return (
       <li className="py-3 sm:py-4">
@@ -29,7 +30,10 @@ const RatioList = ({ config, data }: Props) => {
     );
   });
   return (
-    <div className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
+    <div
+      className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full"
+      id={component}
+    >
       <ul className="divide-y divide-gray-200">{renderedRows}</ul>
     </div>
   );

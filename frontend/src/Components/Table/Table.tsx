@@ -1,7 +1,7 @@
 import React from "react";
 import { testIncomeStatementData } from "./TestData";
 
-type Props = { configs: any; data: any };
+type Props = { configs: any; data: any; component: string };
 
 // const data = testIncomeStatementData;
 // type Company = (typeof data)[0];
@@ -16,12 +16,13 @@ type Props = { configs: any; data: any };
 //   },
 // ];
 
-const Table = ({ configs, data }: Props) => {
+const Table = ({ component, configs, data }: Props) => {
   const renderRows = data.map((company: any) => {
     return (
       <tr key={company.cik}>
         {configs.map((config: any, idx: any) => (
           <td
+            id={component}
             className="p-4 whitespace-nowrap text-sm font-normal text-gray-900"
             key={idx}
           >

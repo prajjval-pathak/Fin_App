@@ -45,6 +45,7 @@ const config = [
 ];
 const CashFlow = (props: Props) => {
   const [cashflow, setCashFlow] = useState<CompanyCashFlow[] | null>();
+  const component: string = "cash-flow";
   const ticker: string = useOutletContext();
   useEffect(() => {
     const getFlow = async () => {
@@ -57,7 +58,7 @@ const CashFlow = (props: Props) => {
     <>
       {cashflow ? (
         <>
-          <Table configs={config} data={cashflow} />
+          <Table component={component} configs={config} data={cashflow} />
         </>
       ) : (
         <LoadingSpinner />

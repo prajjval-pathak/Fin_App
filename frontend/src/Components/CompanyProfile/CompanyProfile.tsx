@@ -37,6 +37,7 @@ const tableConfig = [
 const CompanyProfile = (props: Props) => {
   const ticker = useOutletContext<string>();
   const [companyData, setCompnayData] = useState<CompanyKeyMetrics>();
+  const companyProfile: string = "company-profile";
   useEffect(() => {
     const getCopanyMetrics = async () => {
       const res = await getCompanyKeyMetrics(ticker);
@@ -48,7 +49,11 @@ const CompanyProfile = (props: Props) => {
     <>
       {companyData ? (
         <>
-          <RatioList config={tableConfig} data={companyData} />
+          <RatioList
+            component={companyProfile}
+            config={tableConfig}
+            data={companyData}
+          />
         </>
       ) : (
         <LoadingSpinner />
