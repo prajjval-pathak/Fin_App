@@ -68,6 +68,7 @@ const IncomeStatement = (props: Props) => {
     CompanyIncomeStatement[] | null
   >();
   const ticker: string = useOutletContext();
+  let component:string="income-statement"
   useEffect(() => {
     try {
       const getInc = async () => {
@@ -84,7 +85,7 @@ const IncomeStatement = (props: Props) => {
   return (
     <>
       {incomeStatement ? (
-        <Table configs={configs} data={incomeStatement} />
+        <Table component={component}configs={configs} data={incomeStatement} />
       ) : (
         <LoadingSpinner />
       )}
