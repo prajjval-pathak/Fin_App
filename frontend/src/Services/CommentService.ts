@@ -4,7 +4,7 @@ import { handleError } from "../ErrorHandler/ErrorHandler";
 import { CommentGet } from "../Components/CommentList/CommentList";
 
 const CommentApi = axios.create({
-  baseURL: "https://localhost:44396",
+  baseURL: "https://finapp.somee.com",
 });
 CommentApi.interceptors.request.use((ct: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem("token");
