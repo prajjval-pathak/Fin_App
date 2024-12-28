@@ -1,6 +1,7 @@
 import React from "react";
 import DeletePortfolio from "../DeletePortfolio/DeletePorfolio";
 import { Link } from "react-router-dom";
+import { PortfolioGet } from "../../../CompanyTypes";
 
 interface Props {
   portfolioValue: string;

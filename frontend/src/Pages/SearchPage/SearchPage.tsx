@@ -1,9 +1,17 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import Search from "../../Components/Search/Search";
 import ListPorfolio from "../../Components/Portfolio/PortfolioList/ListPorfolio";
 import CardList from "../../Components/CardList/CardList";
 import { searchCompanies } from "../../api";
-import { CompanySearch } from "../../CompanyTypes";
+import { CompanySearch, PortfolioGet } from "../../CompanyTypes";
+import {
+  PortfolioApiDelete,
+  PortfolioApiGet,
+  PortfolioApiPost,
+} from "../../Services/PortfolioService";
+import { set } from "react-hook-form";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 interface Props {}
 
@@ -11,9 +19,25 @@ const SearchPage = (props: Props) => {
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
-  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
+  const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | []>(
+    []
+  );
+  const [loading, setLoading] = useState<boolean>(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+  };
+  useEffect(() => {
+    GetPortfolioList();
+  }, []);
+  const GetPortfolioList = async () => {
+    try {
+      setLoading(true);
+      const res = await PortfolioApiGet();
+      setPortfolioValues(res?.data!);
+      setLoading(false);
+    } catch (error) {
+      toast.warning("Failed to get Portfolio List");
+    }
   };
   const handleSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -27,22 +51,40 @@ const SearchPage = (props: Props) => {
   };
   const handlePortfolioCreate = (e: any) => {
     e.preventDefault();
-    const doesExist = portfolioValues.find((ele) => ele === e.target[0].value);
-    if (doesExist) return;
-    const updatedPortfolio = [...portfolioValues, e.target[0].value];
-    setPortfolioValues(updatedPortfolio);
+    const portfolioPost = async () => {
+      try {
+        await PortfolioApiPost(e.target[0].value);
+        GetPortfolioList();
+        toast.success("Added to Portfolio");
+      } catch (error) {
+        toast.warning("Failed to add to Portfolio");
+      }
+    };
+    portfolioPost();
   };
   const handleCardPortfolioDelete = (e: any) => {
-    console.log(e);
-    const filteredLi = portfolioValues.filter((ele) => ele !== e.target.value);
-    setPortfolioValues(filteredLi);
+    e.preventDefault();
+    const portfolioDelete = async () => {
+      try {
+        console.log(e.target[0].value);
+        await PortfolioApiDelete(e.target[0].value);
+        GetPortfolioList();
+      } catch (error) {
+        toast.warning("Failed to delete from Portfolio");
+      }
+    };
+    portfolioDelete();
   };
   return (
     <>
-      <ListPorfolio
-        handleCardPortfolioDelete={handleCardPortfolioDelete}
-        portfolioValues={portfolioValues}
-      />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <ListPorfolio
+          handleCardPortfolioDelete={handleCardPortfolioDelete}
+          portfolioValues={portfolioValues}
+        />
+      )}
       <Search
         handleChange={handleChange}
         searchString={search}
