@@ -1,7 +1,8 @@
 import React from "react";
 import CardPortfolio from "../CardPortfolo/CardPortfolio";
+import { PortfolioGet } from "../../../CompanyTypes";
 interface Props {
-  portfolioValues: string[];
+  portfolioValues: PortfolioGet[] | [];
   handleCardPortfolioDelete: (e: any) => void;
 }
 
@@ -20,7 +21,7 @@ const ListPorfolio = ({
             portfolioValues.map((portfolioValue) => {
               return (
                 <CardPortfolio
-                  portfolioValue={portfolioValue}
+                  portfolioValue={portfolioValue.symbol}
                   handleCardPortfolioDelete={handleCardPortfolioDelete}
                 />
               );

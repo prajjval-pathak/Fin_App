@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 
 interface Props {
   children: React.ReactNode;
-  ticker:string
+  ticker: string;
 }
 
 const CompanyDashboard = ({ children, ticker }: Props) => {
