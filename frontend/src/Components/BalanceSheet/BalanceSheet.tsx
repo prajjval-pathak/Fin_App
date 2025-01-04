@@ -67,6 +67,7 @@ const BalanceSheet = (props: Props) => {
   const [balanceSheet, setBalanceSheet] =
     useState<CompanyBalanceSheet | null>();
   const ticker: string = useOutletContext();
+  const bt: string = "balance-sheet";
   useEffect(() => {
     try {
       const getBalance = async () => {
@@ -82,7 +83,7 @@ const BalanceSheet = (props: Props) => {
     <>
       {balanceSheet ? (
         <>
-          <RatioList config={configs} data={balanceSheet} />
+          <RatioList component={bt} config={configs} data={balanceSheet} />
         </>
       ) : (
         <LoadingSpinner />

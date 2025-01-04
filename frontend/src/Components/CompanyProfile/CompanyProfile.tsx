@@ -4,6 +4,11 @@ import { getCompanyKeyMetrics } from "../../api";
 import { useOutletContext } from "react-router";
 import RatioList from "../RatioList/RatioList";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+// import Comments, { CommentsSchema } from "../StockCommentForm/StockCommentForm";
+// import { CommentPostApi } from "../../Services/CommentService";
+// import { toast } from "react-toastify";
+// import StockCommentForm from "../StockCommentForm/StockCommentForm";
+import StockComment from "../StockComment/StockComment";
 
 type Props = {};
 
@@ -37,6 +42,8 @@ const tableConfig = [
 const CompanyProfile = (props: Props) => {
   const ticker = useOutletContext<string>();
   const [companyData, setCompnayData] = useState<CompanyKeyMetrics>();
+
+  const companyProfile: string = "company-profile";
   useEffect(() => {
     const getCopanyMetrics = async () => {
       const res = await getCompanyKeyMetrics(ticker);
@@ -48,7 +55,12 @@ const CompanyProfile = (props: Props) => {
     <>
       {companyData ? (
         <>
-          <RatioList config={tableConfig} data={companyData} />
+          <RatioList
+            component={companyProfile}
+            config={tableConfig}
+            data={companyData}
+          />
+          <StockComment ticker={ticker} />
         </>
       ) : (
         <LoadingSpinner />
