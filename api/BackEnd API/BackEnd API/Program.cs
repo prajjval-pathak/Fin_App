@@ -57,7 +57,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
     options.Password.RequireLowercase = true;
     options.Password.RequiredLength = 12;
     options.User.RequireUniqueEmail = true;
-}).AddEntityFrameworkStores<ApplicationDBContext>();
+    options.SignIn.RequireConfirmedEmail = true;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+}).AddEntityFrameworkStores<ApplicationDBContext>().AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider); 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme =
@@ -81,6 +85,7 @@ builder.Services.AddScoped<IStockRepository,StockRepository>();
 builder.Services.AddScoped<ICommentRepsitory, CommentRepository>();
 builder.Services.AddScoped<ITokenServices,TokenService>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IFMPService, FMPService>();
 builder.Services.AddHttpClient<IFMPService,FMPService>();   
 var app = builder.Build();
