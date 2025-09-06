@@ -55,10 +55,17 @@ namespace BackEnd_API.Controllers
                 else
                 {
                     await _stockRepository.CreateStockAsync(fmpStock);
+
                 }
             }
-            
-                var portCreate = await _portfolioRepository.CreatePortfolio(new Portfolio
+            if (stock == null)
+            {
+                stock = await _stockRepository.GetStockBySymbol(symbl);
+
+
+            }
+
+            var portCreate = await _portfolioRepository.CreatePortfolio(new Portfolio
                 {
                     AppUserId = appUser.Id,
                     StockId = stock.Id,
