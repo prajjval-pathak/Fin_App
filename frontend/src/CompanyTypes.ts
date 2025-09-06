@@ -269,7 +269,7 @@ export type UserProfile = {
   username: string;
   email: string;
 };
-export interface CompanyKeyMetrics {
+export interface  CompanyKeyMetrics {
   revenuePerShareTTM: number;
   netIncomePerShareTTM: number;
   operatingCashFlowPerShareTTM: number;

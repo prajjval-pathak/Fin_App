@@ -10,7 +10,7 @@ namespace BackEnd_API.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        public FMPService(HttpClient httpClient,IConfiguration configuration)
+        public FMPService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _configuration = configuration;
@@ -20,18 +20,22 @@ namespace BackEnd_API.Services
             try
             {
 
-                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/api/v3/profile/{symbol}?apikey={_configuration["FMP_key"]}");
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/profile?symbol={symbol}&apikey={_configuration["FMP_key"]}");
                 if (result.IsSuccessStatusCode)
                 {
-                    var content=await result.Content.ReadAsStringAsync();
+                    var content = await result.Content.ReadAsStringAsync();
                     var res = JsonConvert.DeserializeObject<FmpServiceObj[]>(content);
                     var stock = res[0];
-                    if(stock != null)
+                    if (stock != null)
                     {
                         return stock.toStockFromFMP();
                     }
+                    Console.WriteLine(result);
+
                 }
+
                 return null;
+
             }
             catch (Exception ex)
             {
