@@ -1,9 +1,12 @@
+
+
+
 # FinApp
 
 FinApp is a comprehensive financial application that provides users with the ability to manage their stock portfolios, view stock details, and perform various financial operations. The application is built using a .NET backend and a React frontend.
 
 ## Table of Contents
-
+- [Screen_Shot](#ScreenShots)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
@@ -12,6 +15,15 @@ FinApp is a comprehensive financial application that provides users with the abi
 - [Available Scripts](#available-scripts)
 - [API Endpoints](#api-endpoints)
 
+## ScreenShots
+**Login Page**:
+<img width="1895" height="894" alt="image" src="https://github.com/user-attachments/assets/1fb1d34b-d636-40da-ad83-709edbecfdb9" />
+**Home Page**:
+<img width="1095" height="882" alt="image" src="https://github.com/user-attachments/assets/48f1aee2-6bec-4247-b99a-9b3382572215" />
+**Portfolio Page**
+<img width="1919" height="668" alt="image" src="https://github.com/user-attachments/assets/9fe188b4-e18a-4aec-b78c-c531a6ea8ca8" />
+**Company details Page**
+<img width="1882" height="784" alt="image" src="https://github.com/user-attachments/assets/91e08017-90a0-4f31-a306-6827061b7103" />
 
 ## Features
 
