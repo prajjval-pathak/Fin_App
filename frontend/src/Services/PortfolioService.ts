@@ -3,7 +3,7 @@ import { handleError } from "../ErrorHandler/ErrorHandler";
 import { PortfolioGet } from "../CompanyTypes";
 
 const PortfolioApi = axios.create({
-  baseURL: "https://finapp.somee.com/",
+  baseURL: "https://financeappbackend.somee.com",
 });
 PortfolioApi.interceptors.request.use((ct: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem("token");
