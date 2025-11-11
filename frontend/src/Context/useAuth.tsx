@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 type UserContextType = {
   user: UserProfile | null;
   token: string | null;
-  loginUser: (username: string, password: string) => void;
+  loginUser: (username: string, password: string, from: string) => void;
   registerUser: (email: string, username: string, password: string) => void;
   isLoggedIn: () => boolean;
   logoutUser: () => void;
@@ -40,7 +40,11 @@ export const AuthProvider = ({ children }: Props) => {
     setIsReady(true);
   }, []);
 
-  const loginUser = async (username: string, password: string) => {
+  const loginUser = async (
+    username: string,
+    password: string,
+    from: string
+  ) => {
     try {
       setIsLoading(true);
       const res = await Login(username, password);
@@ -55,7 +59,7 @@ export const AuthProvider = ({ children }: Props) => {
         setUser(userObj!);
         setToken(res?.data.token!);
         setIsLoading(false);
-        // navigate("/search");
+        navigate(from, { replace: true });
         toast.success("login Sucess");
       }
     } catch (error) {
