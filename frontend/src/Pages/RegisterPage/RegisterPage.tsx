@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router";
 import { z } from "zod";
@@ -21,8 +21,9 @@ const schema = z.object({
     .string({ required_error: "Password Is reuqired" })
     .min(12, { message: "Password Should be of minimum 12 characters  " }),
 });
+
 const RegisterPage = (props: Props) => {
-  const { registerUser } = useAuth();
+  const { registerUser, user, token } = useAuth();
   const {
     handleSubmit,
     register,
@@ -33,6 +34,11 @@ const RegisterPage = (props: Props) => {
     console.log("here");
     registerUser(field.email, field.username, field.password);
   };
+  useEffect(() => {
+    if (user && token) {
+      navigate("/");
+    }
+  });
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

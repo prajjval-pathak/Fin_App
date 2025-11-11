@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FieldValue, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,20 +18,25 @@ const scheme = z.object({
 });
 
 const LoginPage = () => {
-  const { loginUser, isLoading } = useAuth();
+  const { loginUser, isLoading, user, token } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   // const val = isAuthorized();
-  const from = location?.state?.from?.pathname || "/";
+  const from: string = location?.state?.from?.pathname || "/";
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<LoginFormInput>({ resolver: zodResolver(scheme) });
   const handleLogin = async (data: LoginFormInput) => {
-    await loginUser(data.username, data.password);
-    navigate(from, { replace: true });
+    await loginUser(data.username, data.password, from);
+    // navigate(from, { replace: true });
   };
+  useEffect(() => {
+    if (user && token) {
+      navigate("/");
+    }
+  });
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
