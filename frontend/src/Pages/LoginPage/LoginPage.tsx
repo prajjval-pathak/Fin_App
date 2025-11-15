@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { FieldValue, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../Context/useAuth";
 import { useLocation, useNavigate } from "react-router";
-import { isAuthorized } from "../../Utils/IsAuthorized";
 import { Link } from "react-router-dom";
 //Design Form Using React hook Form
 //Use Zod For Validation
@@ -90,12 +89,12 @@ const LoginPage = () => {
                 )}
               </div>
               <div className="flex items-center justify-between">
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <button
                 disabled={isLoading}
