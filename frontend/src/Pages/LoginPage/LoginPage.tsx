@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { FieldValue, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../Context/useAuth";
 import { useLocation, useNavigate } from "react-router";
-import { isAuthorized } from "../../Utils/IsAuthorized";
 import { Link } from "react-router-dom";
 //Design Form Using React hook Form
 //Use Zod For Validation
@@ -18,20 +17,25 @@ const scheme = z.object({
 });
 
 const LoginPage = () => {
-  const { loginUser, isLoading } = useAuth();
+  const { loginUser, isLoading, user, token } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   // const val = isAuthorized();
-  const from = location?.state?.from?.pathname || "/";
+  const from: string = location?.state?.from?.pathname || "/";
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<LoginFormInput>({ resolver: zodResolver(scheme) });
   const handleLogin = async (data: LoginFormInput) => {
-    await loginUser(data.username, data.password);
-    navigate(from, { replace: true });
+    await loginUser(data.username, data.password, from);
+    // navigate(from, { replace: true });
   };
+  useEffect(() => {
+    if (user && token) {
+      navigate("/");
+    }
+  });
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -85,12 +89,12 @@ const LoginPage = () => {
                 )}
               </div>
               <div className="flex items-center justify-between">
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="text-sm text-white font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <button
                 disabled={isLoading}
