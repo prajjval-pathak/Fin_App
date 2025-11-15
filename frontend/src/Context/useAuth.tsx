@@ -1,12 +1,6 @@
-import { Navigate, useNavigate } from "react-router";
-import { UserAccountToken, UserProfile } from "../CompanyTypes";
-import {
-  Children,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useNavigate } from "react-router";
+import { UserProfile } from "../CompanyTypes";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Login, RegisterUser } from "../Services/AuthService";
 import { toast } from "react-toastify";
