@@ -1,12 +1,11 @@
-import axios from "axios";
-
 import { handleError } from "../ErrorHandler/ErrorHandler";
 import { UserAccountToken } from "../CompanyTypes";
+import { apiClient } from "../api";
 
 export const Login = async (username: string, password: string) => {
   try {
-    const data = await axios.post<UserAccountToken>(
-      "https://financeappbackend.somee.com/api/account/login",
+    const data = await apiClient.post<UserAccountToken>(
+      "account/login",
       {
         username: username,
         password: password,
@@ -17,6 +16,7 @@ export const Login = async (username: string, password: string) => {
   } catch (error) {
     console.log("here", error);
     handleError(error);
+    throw error; // Re-throw to be caught by useAuth
   }
 };
 export const RegisterUser = async (
@@ -25,8 +25,8 @@ export const RegisterUser = async (
   password: string
 ) => {
   try {
-    const data = await axios.post<UserAccountToken>(
-      "https://financeappbackend.somee.com/api/account/register",
+    const data = await apiClient.post<UserAccountToken>(
+      "account/register",
       {
         email: email,
         username: username,
@@ -36,6 +36,7 @@ export const RegisterUser = async (
     return data;
   } catch (e) {
     handleError(e);
+    throw e; // Re-throw to be caught by useAuth
   }
 };
 // export const isAuthenticateCheck = async () => {
