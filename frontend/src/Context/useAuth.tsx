@@ -52,13 +52,13 @@ export const AuthProvider = ({ children }: Props) => {
         localStorage.setItem("user", JSON.stringify(userObj));
         setUser(userObj!);
         setToken(res?.data.token!);
-        setIsLoading(false);
         navigate(from, { replace: true });
         toast.success("login Sucess");
       }
     } catch (error) {
+      console.log(error);
+    } finally {
       setIsLoading(false);
-      toast.warning("Internal Server error");
     }
   };
   const registerUser = async (
@@ -79,12 +79,12 @@ export const AuthProvider = ({ children }: Props) => {
         setToken(res?.data.token!);
         setUser(regUser!);
         navigate("/search");
-        setIsLoading(false);
         toast.success("Registeration Success");
       }
     } catch (e) {
+      console.log(e);
+    } finally {
       setIsLoading(false);
-      toast.warning("Internal Server Error Occured");
     }
   };
   const isLoggedIn = () => {
