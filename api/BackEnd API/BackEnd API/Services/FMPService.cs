@@ -21,6 +21,7 @@ namespace BackEnd_API.Services
             {
 
                 var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/profile?symbol={symbol}&apikey={_configuration["FMP_key"]}");
+                Console.WriteLine(result);
                 if (result.IsSuccessStatusCode)
                 {
                     var content = await result.Content.ReadAsStringAsync();
@@ -42,6 +43,114 @@ namespace BackEnd_API.Services
 
                 Console.WriteLine($"Exception of type ${ex}");
                 return null;
+            }
+        }
+
+        public async Task<string> SearchCompaniesAsync(string query)
+        {
+            try
+            {
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/search-name?query={query}&apikey={_configuration["FMP_key"]}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return await result.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in SearchCompaniesAsync: {ex}");
+                return "[]";
+            }
+        }
+
+        public async Task<string> GetCompanyProfileAsync(string symbol)
+        {
+            try
+            {
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/profile?symbol={symbol}&apikey={_configuration["FMP_key"]}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return await result.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetCompanyProfileAsync: {ex}");
+                return "[]";
+            }
+        }
+
+        public async Task<string> GetKeyMetricsAsync(string symbol)
+        {
+            try
+            {
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/key-metrics-ttm?symbol={symbol}&apikey={_configuration["FMP_key"]}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return await result.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetKeyMetricsAsync: {ex}");
+                return "[]";
+            }
+        }
+
+        public async Task<string> GetIncomeStatementAsync(string symbol)
+        {
+            try
+            {
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/income-statement?symbol={symbol}&apikey={_configuration["FMP_key"]}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return await result.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetIncomeStatementAsync: {ex}");
+                return "[]";
+            }
+        }
+
+        public async Task<string> GetBalanceSheetAsync(string symbol)
+        {
+            try
+            {
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/balance-sheet-statement?symbol={symbol}&apikey={_configuration["FMP_key"]}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return await result.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetBalanceSheetAsync: {ex}");
+                return "[]";
+            }
+        }
+
+        public async Task<string> GetCashFlowStatementAsync(string symbol)
+        {
+            try
+            {
+                var result = await _httpClient.GetAsync($"https://financialmodelingprep.com/stable/cash-flow-statement?symbol={symbol}&apikey={_configuration["FMP_key"]}");
+                if (result.IsSuccessStatusCode)
+                {
+                    return await result.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception in GetCashFlowStatementAsync: {ex}");
+                return "[]";
             }
         }
     }
