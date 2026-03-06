@@ -12,6 +12,7 @@ import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
 import BalanceSheet from "../Components/BalanceSheet/BalanceSheet";
 import CashFlow from "../Components/CashFlow/CashFlow";
+import StockAnalysisPage from "../Pages/StockAnalysisPage/StockAnalysisPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       },
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
+      { path: "analyze", element: <StockAnalysisPage /> },
       {
         path: "search",
         element: (
@@ -57,7 +59,7 @@ const router = createBrowserRouter([
             element: <IncomeStatement />,
           },
           { path: "balance-sheet", element: <BalanceSheet /> },
-          {path:"cash-flow",element:<CashFlow/>}
+          { path: "cash-flow", element: <CashFlow /> },
         ],
       },
     ],
