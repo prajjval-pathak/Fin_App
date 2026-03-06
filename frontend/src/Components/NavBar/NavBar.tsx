@@ -14,9 +14,12 @@ const NavBar = (props: Props) => {
             <img src={logo} alt="" />
           </Link>
 
-          <div className="hidden font-bold lg:flex">
+          <div className="hidden font-bold lg:flex space-x-6">
             <Link to={"search"} className="text-black hover:text-darkBlue">
               Dashboard
+            </Link>
+            <Link to={"analyze"} className="text-black hover:text-darkBlue">
+              Analyze Stocks
             </Link>
           </div>
         </div>
@@ -38,9 +41,9 @@ const NavBar = (props: Props) => {
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
-          <div className="hidden font-bold lg:flex">
-            <Link to={"search"} className="text-black hover:text-darkBlue">
-              Dashboard
+          <div className="hidden font-bold lg:flex space-x-6">
+            <Link to={"analyze"} className="text-black hover:text-darkBlue">
+              Analyze Stocks
             </Link>
           </div>
         </div>
@@ -59,4 +62,4 @@ const NavBar = (props: Props) => {
     </nav>
   );
 };
-export default NavBar; 
+export default NavBar;
