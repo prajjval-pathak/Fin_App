@@ -17,6 +17,7 @@ namespace BackEnd_API.Controllers
         }
 
         [HttpGet("search")]
+        [AllowAnonymous]
         public async Task<IActionResult> SearchCompanies([FromQuery] string query)
         {
             if (string.IsNullOrWhiteSpace(query))
