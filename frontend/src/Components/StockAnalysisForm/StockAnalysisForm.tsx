@@ -60,7 +60,7 @@ const StockAnalysisForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
 
   const handleRemoveStock = (symbol: string) => {
     setSelectedStocks((current) =>
-      current.filter((stock) => stock.symbol !== symbol)
+      current.filter((stock) => stock.symbol !== symbol),
     );
   };
 
@@ -86,8 +86,8 @@ const StockAnalysisForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
           Stock Analysis
         </h2>
         <p className="text-gray-600 mb-6">
-          Search by company name or ticker, add up to 3 stocks, and analyze
-          them with AI-powered insights.
+          Search by company name or ticker, add up to 3 stocks, and analyze them
+          with AI-powered insights.
         </p>
 
         <form onSubmit={handleSearchSubmit} className="mb-6">
@@ -121,7 +121,7 @@ const StockAnalysisForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
             <div className="divide-y divide-gray-200">
               {searchResults.slice(0, 8).map((company) => {
                 const isSelected = selectedStocks.some(
-                  (stock) => stock.symbol === company.symbol
+                  (stock) => stock.symbol === company.symbol,
                 );
 
                 return (
@@ -212,8 +212,8 @@ const StockAnalysisForm: React.FC<Props> = ({ onSubmit, isLoading }) => {
         </div>
 
         <p className="text-xs text-gray-500 mt-4">
-          Search by company name, then add up to 3 stocks to analyze using
-          their tickers behind the scenes.
+          Search by company name, then add up to 3 stocks to analyze using their
+          tickers behind the scenes.
         </p>
       </div>
     </div>

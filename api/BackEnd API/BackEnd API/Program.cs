@@ -3,6 +3,7 @@ using BackEnd_API.Interfaces;
 using BackEnd_API.Models;
 using BackEnd_API.Repository;
 using BackEnd_API.Services;
+using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
@@ -21,7 +22,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddDbContext<ApplicationDBContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddSwaggerGen(option =>
 {
@@ -50,7 +53,8 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
     options.Password.RequireDigit = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
@@ -66,7 +70,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme =
     options.DefaultSignInScheme =
     options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options => {
+}).AddJwtBearer(options =>
+{
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = false,
@@ -77,12 +82,21 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
     };
 });
-builder.Services.AddScoped<IStockRepository,StockRepository>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepsitory, CommentRepository>();
-builder.Services.AddScoped<ITokenServices,TokenService>();
+builder.Services.AddScoped<ITokenServices, TokenService>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<IFMPService, FMPService>();
-builder.Services.AddHttpClient<IFMPService,FMPService>();   
+builder.Services.AddHttpClient<IFMPService, FMPService>();
+builder.Services.AddScoped<IGeminiService, GeminiService>();
+builder.Services.AddHttpClient<IGeminiService, GeminiService>();
+
+// Add Rate Limiting
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -90,10 +104,11 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
-app.UseCors((x)=>x.AllowAnyHeader().
+app.UseIpRateLimiting();
+app.UseCors((x) => x.AllowAnyHeader().
 AllowAnyMethod().
 AllowCredentials().
-SetIsOriginAllowed(origin=>true));
+SetIsOriginAllowed(origin => true));
 app.UseAuthentication();
 app.UseAuthorization();
 
