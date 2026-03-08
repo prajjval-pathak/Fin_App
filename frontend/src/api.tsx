@@ -14,7 +14,7 @@ import { handleError } from "./ErrorHandler/ErrorHandler";
 export const apiClient = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "https://financeappbackend.somee.com/api/"
+      ? "https://finapp.somee.com/api/"
       : "https://localhost:44396/api/",
 });
 apiClient.interceptors.request.use((ct: InternalAxiosRequestConfig) => {
@@ -108,7 +108,7 @@ export const analyzeStocks = async (tickers: string[]) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 429) {
-        throw new Error("Rate limit exceeded. Please try again later.");
+        throw new Error("Rate limit exceeded. Please try again after 5 minutes.");
       }
       throw new Error(
         error.response?.data?.message ||
