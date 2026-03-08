@@ -9,7 +9,6 @@ import {
   PortfolioApiGet,
   PortfolioApiPost,
 } from "../../Services/PortfolioService";
-import { set } from "react-hook-form";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
@@ -18,7 +17,6 @@ interface Props {}
 const SearchPage = (props: Props) => {
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
-  const [serverError, setServerError] = useState<string>("");
   const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | []>(
     []
   );
@@ -44,7 +42,7 @@ const SearchPage = (props: Props) => {
     const searchRes = await searchCompanies(search);
     //Type Narrowing to avoid type mismatch
     if (typeof searchRes === "string") {
-      setServerError("Search operation failed");
+      toast.warning("Search operation failed");
     } else if (Array.isArray(searchRes)) {
       setSearchResult(searchRes);
     }

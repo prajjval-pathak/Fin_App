@@ -11,10 +11,6 @@ import {
 } from "./CompanyTypes";
 import { handleError } from "./ErrorHandler/ErrorHandler";
 
-interface SearchResponse {
-  data: CompanySearch[];
-}
-
 export const apiClient = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"

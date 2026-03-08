@@ -1,5 +1,4 @@
 import React from "react";
-import { testIncomeStatementData } from "./TestData";
 
 type Props = { configs: any; data: any; component: string };
 

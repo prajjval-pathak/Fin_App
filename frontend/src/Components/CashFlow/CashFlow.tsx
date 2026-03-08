@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CompanyCashFlow } from "../../CompanyTypes";
 import { useOutletContext } from "react-router";
 import { getCashFlowStatement } from "../../api";
-import RatioList from "../RatioList/RatioList";
 import Table from "../Table/Table";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
@@ -53,7 +52,7 @@ const CashFlow = (props: Props) => {
       setCashFlow(res?.data);
     };
     getFlow();
-  }, []);
+  }, [ticker]);
   return (
     <>
       {cashflow ? (
