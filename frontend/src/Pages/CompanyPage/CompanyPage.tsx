@@ -20,7 +20,7 @@ const CompanyPage = (props: Props) => {
     };
 
     companyProfileinit();
-  }, []);
+  }, [ticker]);
 
   return (
     <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">

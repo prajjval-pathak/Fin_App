@@ -119,6 +119,16 @@ export interface CompanyKeyRatios {
   dividendPerShareTTM: number;
 }
 
+// Gemini API Types
+export interface GeminiAnalysisRequest {
+  tickers: string[];
+}
+
+export interface GeminiAnalysisResponse {
+  analysis: string;
+  createdAt: Date;
+}
+
 export interface CompanyIncomeStatement {
   date: string;
   symbol: string;
@@ -269,7 +279,7 @@ export type UserProfile = {
   username: string;
   email: string;
 };
-export interface  CompanyKeyMetrics {
+export interface CompanyKeyMetrics {
   revenuePerShareTTM: number;
   netIncomePerShareTTM: number;
   operatingCashFlowPerShareTTM: number;

@@ -14,21 +14,7 @@ type Props = {
 const StockComment = ({ ticker }: Props) => {
   const [comments, setComments] = React.useState<CommentGet[] | undefined>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
-  React.useEffect(() => {
-    handleGetComments();
-  }, []);
-  const handleCommentSubmit = (e: CommentsSchema) => {
-    CommentPostApi(e.title, e.content, ticker)
-      .then((res) => {
-
-        toast.success("Comment Posted Successfully");
-        handleGetComments();
-      })
-      .catch((e: any) => {
-        toast.warning(e);
-      });
-  };
-  const handleGetComments = () => {
+  const handleGetComments = React.useCallback(() => {
     const handleGetComment = async () => {
       setLoading(true);
       const res = await CommentGetApi(ticker);
@@ -36,6 +22,19 @@ const StockComment = ({ ticker }: Props) => {
       setLoading(false);
     };
     handleGetComment();
+  }, [ticker]);
+  React.useEffect(() => {
+    handleGetComments();
+  }, [handleGetComments]);
+  const handleCommentSubmit = (e: CommentsSchema) => {
+    CommentPostApi(e.title, e.content, ticker)
+      .then(() => {
+        toast.success("Comment Posted Successfully");
+        handleGetComments();
+      })
+      .catch((e: any) => {
+        toast.warning(e);
+      });
   };
   return (
     <div className="flex flex-col">
