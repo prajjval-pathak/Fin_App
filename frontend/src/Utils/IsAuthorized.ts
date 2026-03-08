@@ -1,6 +1,4 @@
-import { reduceEachLeadingCommentRange } from "typescript";
 import { apiClient } from "../api";
-import { AxiosError } from "axios";
 import { handleError } from "../ErrorHandler/ErrorHandler";
 
 export const isAuthorized = async () => {

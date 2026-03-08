@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  CompanyBalanceSheet,
-  CompanyIncomeStatement,
-} from "../../CompanyTypes";
+import { CompanyBalanceSheet } from "../../CompanyTypes";
 import { getBalanceSheet } from "../../api";
 import { useOutletContext } from "react-router";
 import RatioList from "../RatioList/RatioList";
@@ -78,7 +75,7 @@ const BalanceSheet = (props: Props) => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [ticker]);
   return (
     <>
       {balanceSheet ? (

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router";
-import { useAuth } from "../Context/useAuth";
 import { isAuthorized } from "../Utils/IsAuthorized";
 import LoadingSpinner from "../Components/LoadingSpinner/LoadingSpinner";
 
@@ -22,7 +21,6 @@ const ProtectedRoute = ({ children }: Props) => {
       }
     };
     verifyAuthorization();
-    console.log(isAuthenticated);
   }, []);
   if (isAuthenticated === "") {
     return <LoadingSpinner />;

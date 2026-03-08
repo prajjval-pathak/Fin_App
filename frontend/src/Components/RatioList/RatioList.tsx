@@ -1,8 +1,4 @@
 import React from "react";
-import { TestDataCompany } from "../Table/TestData";
-
-const data = TestDataCompany[0];
-type Company = typeof data;
 type Props = {
   config: any;
   data: any;
