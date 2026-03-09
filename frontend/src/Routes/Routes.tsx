@@ -1,7 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Hero from "../Components/Hero/Hero";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import CompanyPage from "../Pages/CompanyPage/CompanyPage";
 import CompanyProfile from "../Components/CompanyProfile/CompanyProfile";
@@ -13,6 +12,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import BalanceSheet from "../Components/BalanceSheet/BalanceSheet";
 import CashFlow from "../Components/CashFlow/CashFlow";
 import StockAnalysisPage from "../Pages/StockAnalysisPage/StockAnalysisPage";
+import HomePage from "../Pages/HomePage/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Hero />,
+        element: <HomePage />,
       },
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
