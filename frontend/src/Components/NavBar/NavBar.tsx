@@ -102,21 +102,6 @@ const NavBar = () => {
         </button>
       </div>
     </nav>
-  ) : (
-    <nav className="relative container mx-auto p-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-20">
-          <Link to="/">
-            <img src={logo} alt="" />
-          </Link>
-          <div className="hidden font-bold lg:flex space-x-6">
-            <Link to={"analyze"} className="text-black hover:text-darkBlue">
-              Analyze Stocks
-            </Link>
-          </div>
-        </div>
-      ) : null}
-    </nav>
   );
 };
 export default NavBar;
