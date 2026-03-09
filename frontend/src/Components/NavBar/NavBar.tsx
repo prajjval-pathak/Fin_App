@@ -16,21 +16,21 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const loggedIn = isLoggedIn();
 
-  const primaryLinks: NavLinkItem[] = loggedIn
-    ? [
-        { to: "/", label: "Home" },
-        { to: "/analyze", label: "Analyze" },
-        { to: "/search", label: "Dashboard" },
-      ]
-    : [
-        { to: "/", label: "Home" },
-        { to: "/analyze", label: "Analyze" },
-        {
-          to: "/login",
-          label: "Dashboard",
-          state: { from: { pathname: "/search" } },
-        },
-      ];
+  // const primaryLinks: NavLinkItem[] = loggedIn
+  //   ? [
+  //       { to: "/", label: "Home" },
+  //       { to: "/analyze", label: "Analyze" },
+  //       { to: "/search", label: "Dashboard" },
+  //     ]
+  //   : [
+  //       { to: "/", label: "Home" },
+  //       { to: "/analyze", label: "Analyze" },
+  //       {
+  //         to: "/login",
+  //         label: "Dashboard",
+  //         state: { from: { pathname: "/search" } },
+  //       },
+      // ];
 
   const secondaryLinks: NavLinkItem[] = loggedIn
     ? [{ to: "/", label: "Logout", accent: true, onClick: logoutUser }]

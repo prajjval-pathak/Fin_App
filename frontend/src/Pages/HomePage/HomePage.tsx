@@ -191,30 +191,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-white/[0.03]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-300">
-              Public analyzer
-            </p>
-            <h2 className="mt-4 max-w-2xl text-3xl font-semibold text-white">
-              The analyzer is still a first-class product, not a teaser for login.
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-300 sm:text-base">
-              Use it for fast initial screening, then move into the dashboard if
-              you want to save names, manage a portfolio, and inspect full
-              company fundamentals.
-            </p>
-          </div>
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5">
-            <img
-              src={hero}
-              alt="FinApp stock analysis preview"
-              className="h-64 w-full object-cover object-top"
-            />
-          </div>
-        </div>
-      </section>
     </main>
   );
 };
