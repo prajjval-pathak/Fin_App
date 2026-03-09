@@ -12,7 +12,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import BalanceSheet from "../Components/BalanceSheet/BalanceSheet";
 import CashFlow from "../Components/CashFlow/CashFlow";
 import StockAnalysisPage from "../Pages/StockAnalysisPage/StockAnalysisPage";
-import HomePage from "../Pages/HomePage/HomePage";
 
 const router = createBrowserRouter([
   {

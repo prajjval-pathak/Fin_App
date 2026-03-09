@@ -49,17 +49,13 @@ const NavBar = () => {
             <img src={logo} alt="FinApp" className="h-10 w-auto" />
           </Link>
 
-          <div className="hidden items-center gap-6 text-sm font-semibold text-stone-700 lg:flex">
-            {primaryLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.to}
-                state={link.state}
-                className="transition hover:text-darkBlue"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden font-bold lg:flex space-x-6">
+            <Link to={"search"} className="text-black hover:text-darkBlue">
+              Dashboard
+            </Link>
+            <Link to={"analyze"} className="text-black hover:text-darkBlue">
+              Analyze Stocks
+            </Link>
           </div>
         </div>
 
@@ -105,59 +101,22 @@ const NavBar = () => {
           <span className="text-xl leading-none">{isMenuOpen ? "x" : "="}</span>
         </button>
       </div>
-
-      {isMenuOpen ? (
-        <div className="border-t border-stone-200 bg-white lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-4 sm:px-8">
-            {loggedIn && user?.username ? (
-              <div className="pb-2 text-sm font-medium text-stone-500">
-                Signed in as {user.username}
-              </div>
-            ) : null}
-            {primaryLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.to}
-                state={link.state}
-                onClick={closeMenu}
-                className="rounded-2xl border border-stone-200 px-4 py-3 text-sm font-semibold text-stone-800"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {secondaryLinks.map((link) =>
-              link.onClick ? (
-                <button
-                  key={link.label}
-                  onClick={() => {
-                    link.onClick?.();
-                    closeMenu();
-                  }}
-                  className="rounded-2xl bg-lightGreen px-4 py-3 text-sm font-semibold text-stone-950"
-                >
-                  {link.label}
-                </button>
-              ) : (
-                <Link
-                  key={link.label}
-                  to={link.to}
-                  state={link.state}
-                  onClick={closeMenu}
-                  className={
-                    link.accent
-                      ? "rounded-2xl bg-lightGreen px-4 py-3 text-sm font-semibold text-stone-950"
-                      : "rounded-2xl border border-stone-200 px-4 py-3 text-sm font-semibold text-stone-800"
-                  }
-                >
-                  {link.label}
-                </Link>
-              ),
-            )}
+    </nav>
+  ) : (
+    <nav className="relative container mx-auto p-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-20">
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
+          <div className="hidden font-bold lg:flex space-x-6">
+            <Link to={"analyze"} className="text-black hover:text-darkBlue">
+              Analyze Stocks
+            </Link>
           </div>
         </div>
       ) : null}
     </nav>
   );
 };
-
 export default NavBar;

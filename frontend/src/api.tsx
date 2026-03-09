@@ -108,9 +108,7 @@ export const analyzeStocks = async (tickers: string[]) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 429) {
-        throw new Error(
-          "Rate limit exceeded. Please try again after 5 minutes.",
-        );
+        throw new Error("Rate limit exceeded. Please try again after 5 minutes.");
       }
       throw new Error(
         error.response?.data?.message ||

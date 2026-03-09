@@ -66,7 +66,7 @@ namespace BackEnd_API.Controllers
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("Rate limit exceeded"))
             {
-                    return StatusCode(429, new { message = "API rate limit exceeded. Please try again after 5 minutes." });
+                return StatusCode(429, new { message = "API rate limit exceeded. Please try again later." });
             }
             catch (Exception ex)
             {
