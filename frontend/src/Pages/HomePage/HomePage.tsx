@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import hero from "../../Components/Hero/hero.png";
 import { useAuth } from "../../Context/useAuth";
 
 const analyzerHighlights = [
