@@ -1,9 +1,9 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Hero from "../Components/Hero/Hero";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import CompanyPage from "../Pages/CompanyPage/CompanyPage";
+import HomePage from "../Pages/HomePage/HomePage";
 import CompanyProfile from "../Components/CompanyProfile/CompanyProfile";
 import IncomeStatement from "../Components/IncomeStatement/IncomeStatement";
 // import DesignPage from "../Pages/DesignPage/DesignPage";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Hero />,
+        element: <HomePage />,
       },
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
